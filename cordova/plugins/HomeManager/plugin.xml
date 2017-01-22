@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.amazon.cordova.plugin.homemanager"
+    version="0.1.1">
+    <name>HomeManager</name>
+    <description>Cordova HomeManager Plugin</description>
+    <license>Copyright (c) 2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.</license>
+    <keywords>cordova,badge,hero,grid,list</keywords>
+    <repo></repo>
+    <issue></issue>
+
+    <js-module src="www/amazonHomeManager.js" name="HomeManagerPlugin">
+        <runs/>
+    </js-module>
+
+    <!-- amazon-fireos -->
+    <platform name="amazon-fireos">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="HomeManagerPlugin" >
+                <param name="android-package" value="com.amazon.cordova.plugin.homemanager.HomeManagerPlugin"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <uses-library android:name="com.amazon.device.home" android:required="false" />
+        </config-file>
+
+        <source-file src="lib/Cordova-AmazonWebView-Plugin-HomeManager-1.0.jar" target-dir="libs" />
+    </platform>
+
+</plugin>

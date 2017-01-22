@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.amazon.cordova.plugin.motiongesturemanager"
+    version="0.1.1">
+    <name>MotionGestureManager</name>
+    <description>Cordova MotionGesture Plugin</description>
+    <license>Copyright (c) 2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.</license>
+    <keywords>cordova,motion,gesture,tilt,peek</keywords>
+    <repo></repo>
+    <issue></issue>
+
+    <js-module src="www/MotionGestureManager.js" name="MotionGestureManager">
+        <runs/>
+    </js-module>
+
+    <!-- amazon-fireos -->
+    <platform name="amazon-fireos">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="MotionGestureManager" >
+                <param name="android-package" value="com.amazon.cordova.plugin.MotionGestureManager"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+
+        <source-file src="lib/Cordova-AmazonWebView-Plugin-MotionGestureManager-1.0.jar" target-dir="libs" />
+    </platform>
+
+</plugin>

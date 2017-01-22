@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+ * Copyright (c) 2005-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Use is subject to license terms.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>Hello World</title>
+</head>
+
+<body>
+    <h3>CallbackData before onDeviceReady:</h3>
+    <div id="initial-text">
+        Nothing here, should change.
+    </div>
+    <h3>CallBack Data From Hero:</h3>
+    <div id="callback-text">
+        No callback hit yet.
+    </div>
+    <div id="button-container">
+        <a href="javascript:app.setWidgetDefault()" class="changebutton">Set Hero to Grouped List Default Style</a>
+        <a href="javascript:app.setWidgetGrid()" class="changebutton">Set Hero Grouped Grid</a>
+        <a href="javascript:app.setWidgetEmpty()" class="changebutton">Set Hero to empty with text</a>
+        <a href="javascript:app.setBadgeTen()" class="changebutton">Set Numeric Badge to 10</a>
+        <a href="javascript:app.setBadgeHigh()" class="changebutton">Set Numeric Badge to 1240</a>
+        <a href="javascript:app.removeBadge()" class="changebutton">Remove Numeric Badge</a>
+        <a href="javascript:app.setWidgetAllStyles()" class="changebutton">Set Hero to List with All Styles</a>
+        <a href="javascript:app.setGridWithPlay()" class="changebutton">Set Hero to Grid with Playbutton/Duration</a>
+        <a href="javascript:app.setEmptyNoText()" class="changebutton">Set Hero to empty with no text</a>
+        <a href="javascript:app.testJS()" class="changebutton">JS Test Function</a>
+
+
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+    window.myHeroCallback = function(data) {
+        console.log("recieved hero function in JS with data: " + data);
+
+        document.getElementById("callback-text").innerHTML = data;
+
+    }
+    app.initialize();
+    </script>
+</body>
+
+</html>

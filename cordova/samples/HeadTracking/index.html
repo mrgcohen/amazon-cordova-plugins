@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+    Use is subject to license terms.
+--><html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Head tracking sample</title>
+
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+        <style>
+            * { box-sizing: border-box }
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+            #container{
+                width: 100%;
+                height: 100%;
+            }
+            #log{
+                border: 1px solid #ccc;
+                margin: 5px;
+                padding: 5px;
+                font-size: .9em;
+            }
+            #ball{
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 20px;
+                height: 20px;
+                background-color: red;
+                border-radius: 100%;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <div id="container">
+            <div id="log"></div>
+            <div id="ball"></div>
+        </div>
+        <script>
+
+        var ball   = document.querySelector('#ball');
+        var log = document.querySelector('#log');
+
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+
+        var logText = "";
+        var x_mm = 0;
+        var y_mm = 0;
+        var z_mm = 0;
+        var headAngle = 0;
+        var faceDetected = false;
+
+        window.addEventListener('amazonheadtracking', handleAmazonHeadTracking);
+
+        animate();
+
+        function handleAmazonHeadTracking(event){
+
+            logText = "";
+            logText += "headInclinationAngle_deg: " + event.headInclinationAngle_deg + "<br>";
+            logText += "isFaceDetected: " + event.isFaceDetected + "<br>";
+            logText += "isTracking: " + event.isTracking + "<br>";
+            logText += "timestamp_nsecs: " + event.timestamp_nsecs + "<br>";
+            logText += "x_mm: " + event.x_mm + "<br>";
+            logText += "y_mm: " + event.y_mm + "<br>";
+            logText += "z_mm: " + event.z_mm;
+
+            x_mm = event.x_mm;
+            y_mm = event.y_mm;
+            z_mm = event.z_mm;
+
+            headAngle = event.headInclinationAngle_deg;
+
+            faceDetected = event.isFaceDetected;
+
+        }
+
+        function animate(){
+
+            var xArc = Math.atan2(x_mm, z_mm) * 100;
+            var yArc = Math.atan2(y_mm, z_mm) * 100;
+
+            var left = w * ((xArc + 50) / 100);
+            var top = h - (h * ((yArc + 50) / 100));
+
+            var scale = 4 * (Math.floor(z_mm/5) / 100);
+
+            ball.style.webkitTransform = "scale(" + scale + ")";
+
+            ball.style.top = (top - 10) + "px";
+            ball.style.left = (left - 10) + "px";
+
+            if(Math.abs(headAngle) > 10){
+                ball.style.backgroundColor = "blue";
+            } else {
+                ball.style.backgroundColor = "red";
+            }
+
+            if(!faceDetected){
+                ball.style.backgroundColor = "#000";
+            }
+
+            log.innerHTML = logText;
+
+            requestAnimationFrame(animate);
+
+        }
+
+        </script>
+    </body>
+</html>
