@@ -1,7 +1,7 @@
 Plugins
 
-1. cordova plugin add https://github.com/mrgcohen/amazon-cordova-plugins/tree/master/cordova/plugins/HomeManager
-2. cordova plugin add https://github.com/mrgcohen/amazon-cordova-plugins/tree/master/cordova/plugins/MotionGestureManager
+1. `cordova plugin add https://github.com/mrgcohen/amazon-cordova-plugins/tree/master/cordova/plugins/HomeManager`
+2. `cordova plugin add https://github.com/mrgcohen/amazon-cordova-plugins/tree/master/cordova/plugins/MotionGestureManager`
 
 Contents of the SDK
 
